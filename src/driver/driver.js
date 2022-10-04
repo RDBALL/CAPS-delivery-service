@@ -3,13 +3,13 @@
 const event = require('../eventPool');
 
 function shipping(payload) {
-  payload.event = 'shipping';
+  payload.event = 'IN-TRANSIT';
   event.emit('log', payload);
-  console.log(`DRIVER: shipping orderId: ${payload.orderId}`);
+  console.log(`DRIVER : picked up orderId ${payload.orderId}`);
 }
 
 function delivered(payload) {
-  payload.event = 'delivered';
+  payload.event = 'DELIVERED';
   event.emit('log', payload);
   console.log(`DRIVER: delivered orderId: ${payload.orderId}`);
 }
