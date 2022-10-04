@@ -1,6 +1,8 @@
 'use strict';
 
-const Events = require('events');
-const events = new Events();
+const Event = require('events');
 
-module.exports = events;
+const event = new Event();
+const payload = console.log(payload);
+
+module.exports = event, payload;

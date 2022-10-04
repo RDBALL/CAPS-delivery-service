@@ -1,8 +1,8 @@
 'use strict';
 
-const events = require('../index');
+const event = require('../index');
 const driver = require('../src/deliveryDriver');
-const logger = require('../src/eventLogger');
+const eventLogger = require('../src/eventLogger');
 const Chance = require('chance');
 
 let chance = new Chance();
@@ -18,11 +18,11 @@ describe('Testing driver event emit logging', () => {
   test('Should log that the driver is transiting the order', () => {
     jest.spyOn(console, 'log');
 
-    events.on('log', logger);
+    event.on('log', eventLogger);
     payload.event = 'shipping';
 
-    events.on('shipping', driver.shipping);
-    events.emit('shipping', payload);
+    event.on('shipping', driver.shipping);
+    event.emit('shipping', payload);
 
     expect(console.log).toHaveBeenCalledWith(`DRIVER: shipping orderId: ${payload.orderId}`);
     expect(console.log).toHaveBeenCalledWith(payload);
@@ -33,8 +33,8 @@ describe('Testing driver event emit logging', () => {
 
     payload.event = 'delivered';
 
-    events.on('delivered', driver.delivered);
-    events.emit('delivered', payload);
+    event.on('delivered', driver.delivered);
+    event.emit('delivered', payload);
 
     expect(console.log).toHaveBeenCalledWith(`DRIVER: delivered orderId: ${payload.orderId}`);
     expect(console.log).toHaveBeenCalledWith(payload);

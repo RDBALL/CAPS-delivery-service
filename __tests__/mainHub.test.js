@@ -1,8 +1,8 @@
 'use strict';
 
-const events = require('../index');
+const event = require('../index');
 const mainHub = require('../src/mainHub');
-const logger = require('../src/eventLogger');
+const eventLogger = require('../src/eventLogger');
 const Chance = require('chance');
 
 let chance = new Chance();
@@ -19,10 +19,10 @@ describe('Testing mainHub event emit logging', () => {
   test('mainHub has received an order and returns an orderID', () => {
     jest.spyOn(console, 'log');
 
-    events.on('log', logger);
+    event.on('log', eventLogger);
     payload.event = 'newOrder';
-    events.on('newOrder', mainHub.newOrder);
-    events.emit('newOrder', payload);
+    event.on('newOrder', mainHub.newOrder);
+    event.emit('newOrder', payload);
 
     expect(console.log).toHaveBeenCalledWith(`HUB: new order  - orderId: ${payload.orderId}`);
     expect(console.log).toHaveBeenCalledWith(payload);
@@ -31,10 +31,10 @@ describe('Testing mainHub event emit logging', () => {
   test('mainHub has an orderID ready for pickup', () => {
     jest.spyOn(console, 'log');
 
-    events.on('log', logger);
+    event.on('log', eventLogger);
     payload.event = 'pickup';
-    events.on('pickup', mainHub.pickup);
-    events.emit('pickup', payload);
+    event.on('pickup', mainHub.pickup);
+    event.emit('pickup', payload);
 
     expect(console.log).toHaveBeenCalledWith(`HUB: orderId: ${payload.orderId} ready for pickup`);
     expect(console.log).toHaveBeenCalledWith(payload);
