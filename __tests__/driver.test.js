@@ -1,8 +1,8 @@
 'use strict';
 
-const event = require('../index');
-const driver = require('../src/deliveryDriver');
-const eventLogger = require('../src/eventLogger');
+const event = require('../src/eventPool');
+const driver = require('../src/driver/driver');
+const eventLogger = require('../src/eventLogger.js');
 const Chance = require('chance');
 
 let chance = new Chance();
