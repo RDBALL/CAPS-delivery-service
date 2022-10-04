@@ -2,7 +2,7 @@
 
 const event = require('../index');
 const driver = require('../src/deliveryDriver');
-const eventLogger = require('../src/eventLogger');
+const eventLogger = require('../src/eventLogger.js');
 const Chance = require('chance');
 
 let chance = new Chance();

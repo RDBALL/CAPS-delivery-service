@@ -1,6 +1,6 @@
 'use strict';
 
-const event = require('../index');
+const event = require('../eventPool');
 
 function shipping(payload) {
   payload.event = 'shipping';
