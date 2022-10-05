@@ -33,25 +33,24 @@ Documentation:
 
 ![UML lab11](src/assets/lab11uml.jpg)
 
+---
+
+## Phase 2 - Websocket | Sockit.io
+
+* CAPS Phase 2: Continue working on a multi-day build of our delivery tracking system, creating an event observable over a network with Socket.io.
+
+* In this phase, we’ll be moving away from using Node Events for managing a pool of events, instead refactoring to using the Socket.io libraries. This allows communication between Server and Client applications.
+
+* The intent here is to build the data services that would drive a suite of applications where we can see pickups and deliveries in real-time.
+
+
+![socketEvent](./src/assets//socketEvent.jpg)
 Dependencies
 
 ```JSON
 {
-  "base-64": "^1.0.0",
-  "bcrypt": "^5.0.1",
-  "cors": "^2.8.5",
-  "dotenv": "^16.0.2",
-  "eslint": "^8.24.0",
-  "express": "^4.18.1",
-  "jest": "^29.0.3",
-  "jsonwebtoken": "^8.5.1",
-  "morgan": "^1.10.0",
-  "nodemon": "^2.0.20",
-  "pg": "^8.8.0",
-  "sequelize": "^6.23.1",
-  "sequelize-cli": "^6.4.1",
-  "sqlite3": "^5.1.1",
-  "supertest": "^6.2.4"
+    "socket.io": "^4.5.2",
+    "socket.io-client": "^4.5.2"
 }
 ```
 
