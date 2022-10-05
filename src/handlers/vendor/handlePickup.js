@@ -12,6 +12,7 @@ const payload = {
 
 module.exports = (socket) => {
   payload.event = 'PICKUP';
+  socket.emit('JOIN', payload.storeId);
   socket.emit('log', payload);
   console.log(`VENDOR: new order ready for pickup, order id: ${payload.orderId}`);
   socket.emit('PICKUP', payload)

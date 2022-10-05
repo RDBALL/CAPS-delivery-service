@@ -15,6 +15,11 @@ caps.on('connection', (socket) => {
 
   socket.on('log', eventLogger);
 
+  socket.on('JOIN', payload => {
+    socket.join(payload);
+    console.log(`${socket.id} has entered ${payload}`);
+  });
+
   socket.on('PICKUP', payload => {
     socket.join(payload.store);
     console.log(socket.id);
@@ -26,7 +31,7 @@ caps.on('connection', (socket) => {
   });
 
   eventPool.forEach(event => {
-    socket.on(event, (payload) => socket.broadcast.emit(event, payload));
+    socket.on(event, (payload) => socket.(`${payload.storeId}`).emit(event, payload));
   });
 });
 
