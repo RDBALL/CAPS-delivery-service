@@ -15,6 +15,16 @@ caps.on('connection', (socket) => {
 
   socket.on('log', eventLogger);
 
+  socket.on('PICKUP', payload => {
+    socket.join(payload.store);
+    console.log(socket.id);
+  });
+
+  socket.on('IN-TRANSIT', payload => {
+    socket.join(payload.store);
+    console.log(socket.id);
+  });
+
   eventPool.forEach(event => {
     socket.on(event, (payload) => socket.broadcast.emit(event, payload));
   });
