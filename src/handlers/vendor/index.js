@@ -10,10 +10,8 @@ socket.on('connect', () => {
   console.log(`connected to CAPS as ${socket.id}`);
 });
 
-setInterval(() => {
-  console.log('------- NEW ORDER FOUND -------');
-  handlePickup(socket);
-}, 5000)
+handlePickup(socket);
+
 
 
 socket.on('DELIVERED', handleDelivered(socket));

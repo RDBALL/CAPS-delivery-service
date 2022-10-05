@@ -17,21 +17,22 @@ caps.on('connection', (socket) => {
 
   socket.on('JOIN', payload => {
     socket.join(payload);
-    console.log(`${socket.id} has entered ${payload}`);
+    console.log(`${socket.id} has entered ROOM: ${payload}`);
   });
 
   socket.on('PICKUP', payload => {
-    socket.join(payload.store);
-    console.log(socket.id);
+    socket.broadcast.emit('PICKUP', payload);
+    // socket.join(payload.store);
+    // console.log(socket.id);
   });
 
-  socket.on('IN-TRANSIT', payload => {
-    socket.join(payload.store);
-    console.log(socket.id);
-  });
+  // socket.on('IN-TRANSIT', payload => {
+  //   socket.join(payload.store);
+  //   console.log(socket.id);
+  // });
 
   eventPool.forEach(event => {
-    socket.on(event, (payload) => socket.(`${payload.storeId}`).emit(event, payload));
+    socket.on(event, (payload) => socket.broadcast.emit(event, payload));
   });
 });
 
