@@ -7,6 +7,7 @@ const VendorClient = require('./handleVendorClient');
 const acmeVendor = new VendorClient('acme-widgets');
 const flowersVendor = new VendorClient('1-800-flowers');
 
+setInterval(() => {
   acmeVendor.newOrder({
     orderID: chance.guid,
     customer: chance.name(),
@@ -14,7 +15,9 @@ const flowersVendor = new VendorClient('1-800-flowers');
   });
   acmeVendor.publishDeliveries();
   acmeVendor.subscribeDeliveries();
+}, 3000);
 
+setInterval(() => {
   flowersVendor.newOrder({
     orderID: chance.guid(),
     customer: chance.name(),
@@ -22,3 +25,6 @@ const flowersVendor = new VendorClient('1-800-flowers');
   });
   flowersVendor.publishDeliveries();
   flowersVendor.subscribeDeliveries();
+
+}, 3000);
+

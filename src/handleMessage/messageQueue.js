@@ -1,56 +1,41 @@
 'use strict';
 
-const Chance = require('chance');
-const chance = new Chance();
-
-class MessageQueue {
+class Queue {
   constructor() {
-    this.messages = {};
+    this.data = {};
   }
 
-  add(queueId, payload) {
-    let messageId = chance.guid();
-
-    try {
-      if(this.messages[queueId]) {
-        this.messages[queueId][messageId] = payload;
-      } else {
-        this.messages[queueId] = { [messageId]: payload };
-      }
-      return messageId;
-    } catch(e) {
-      console.log(e);
-      throw new Error('Add message error', e);
-    }
+  create(key, value) {
+    this.data[key] = value;
+    return this.data[key];
   }
 
-  get(queueId) {
-    try {
-      return Object.keys(this.messages[queueId]).map(messageId => ({
-        messageId: messageId,
-        payload: this.messages[queueId][messageId],
-      }));
-    } catch(e) {
-      console.log(e);
-      throw new Error('Queue get error', e);
-    }
+  read(key) {
+    return this.data[key];
   }
 
-  read(queueId, messageId) {
-    try {
-      if(this.messages[queueId]) {
-        delete this.messages[queueId][messageId];
-        return ({
-          status: 'received',
-          messageId,
-        });
-      } else {
-        throw new Error('Error reading message');
-      }
-    } catch(e) {
-      console.log(e);
+  remove(key) {
+    let value = this.data[key];
+    delete this.data[key];
+    return value;
+  }
+
+  readAllValues() {
+    return Object.values(this.data);
+  }
+
+  hasKey(key) {
+    return Boolean(this.data[key]);
+  }
+
+  createIfNoneExists(key, value) {
+    if (this.data[key]) {
+      return this.data[key];
+    } else {
+      this.data[key] = value;
+      return this.data[key];
     }
   }
 }
 
-module.exports = MessageQueue;
+module.exports = Queue;
